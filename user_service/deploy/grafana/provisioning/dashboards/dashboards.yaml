@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: "Go Process"
+    orgId: 1
+    folder: "github.com/EmreZURNACI/ProdFullReadyApp_User"
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 10
+    options:
+      path: /etc/grafana/provisioning/dashboards

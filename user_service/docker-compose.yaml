@@ -1,0 +1,42 @@
+version: "3.11"
+services: 
+  user_service:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: "user_service"
+    ports:
+      - "8080:8080"
+    networks:
+      - user_service
+  prometheus:
+    image: prom/prometheus
+    container_name: "prometheus"
+    ports: 
+      - "9090:9090"
+    networks:
+      - user_service
+    volumes:
+      - "./deploy/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml"
+    depends_on:
+      - user_service
+  grafana:
+    image: grafana/grafana-oss
+    container_name: "grafana"
+    ports:
+      - "3000:3000"
+    networks:
+      - user_service
+    depends_on: 
+      - user_service
+      - prometheus
+    volumes:
+      - "./deploy/grafana/provisioning/datasources/prometheus.yml:/etc/grafana/provisioning/datasources/prometheus.yml"
+      - "./deploy/grafana/provisioning/dashboards/GoProcesses.json:/etc/grafana/provisioning/dashboards/GoProcesses.json"
+      - "./deploy/grafana/provisioning/dashboards/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml"
+networks:
+  user_service:
+    driver: bridge
+
+
+# grafana dashboard import id = 6671

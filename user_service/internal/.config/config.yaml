@@ -1,0 +1,27 @@
+server:
+  port: "8080"
+  secret_key: "COK GİZLİ"
+
+postgres:
+  host: "localhost"
+  port: "5432"
+  user: "emre"
+  password: "123"
+  name: "cqrs"
+  sslmode: "disable"
+
+mongo:
+  user: "emrezurnaci38_db_user"
+  password: "X79sp5Gc3rSapVQH"
+  appname: "ProdReadyCQRS"
+  name: "ProdReadyCqrs"
+  collection: "users"
+
+aws_postgres:
+  #host: "prodreadycqrs.c3s6sgak8p6s.eu-central-1.rds.amazonaws.com"
+  host: "3.67.50.223"
+  port: "5432"
+  user: "emre"
+  password: "emrepostgres123"
+  name: "cqrs"
+  sslmode: "enable"
